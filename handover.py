@@ -11,16 +11,27 @@ import plotly.express as px
 import plotly.graph_objects as go
 
 
-st.set_page_config(page_title='SWAST - Handover Delays',  layout='wide', page_icon=':ambulance:')
+st.set_page_config(page_title='ProtonInsights',  layout='wide', page_icon=':Bar chart fill:')
 
 #this is the header
  
 
-t1, t2 = st.columns((0.07,1)) 
+t1, t2 = st.columns((0.7,1))
 
-t1.image('images/index.png', width = 120)
-t2.title("South Western Ambulance Service - Hospital Handover Report")
-t2.markdown(" **tel:** 01392 451192 **| website:** https://www.swast.nhs.uk **| email:** mailto:data.science@swast.nhs.uk")
+t1.image('images/Pie.jpg', width = 120)
+#t2.title("ProtonInsights - we work on data projects!!!")
+st.markdown("""
+    <style>
+    .big-font {
+        font-size:80px !important;
+    }
+    </style>
+    """, unsafe_allow_html=True)
+st.markdown('<p class="big-font">Proton Insights</p>', unsafe_allow_html=True)
+left_column, right_column = st.columns(2)
+with left_column:
+    st.header("we work on data!!!")
+t2.markdown(" **Tel:** 040 24443076 **| Address:** 705,Amrutha castle, near Telecom colony,Gachibowli,Hyderabad,India,500032 **|email:** you_contactus@proton.me ")
 
 
 
@@ -31,7 +42,7 @@ with st.spinner('Updating Report...'):
     #Metrics setting and rendering
 
     hosp_df = pd.read_excel('DataforMock.xlsx',sheet_name = 'Hospitals')
-    hosp = st.selectbox('Choose Hospital', hosp_df, help = 'Filter report to show only one hospital')
+    hosp = st.selectbox('Choose Healthcare provider', hosp_df, help = 'Filter report to show only one stock')
     
     m1, m2, m3, m4, m5 = st.columns((1,1,1,1,1))
     
@@ -128,10 +139,10 @@ with st.spinner('Updating Report...'):
     
     cwdf = pd.read_excel('DataforMock.xlsx',sheet_name = 'CurrentWaitingCallsigns')
     
-    if hosp == 'All':
-        cwdf = cwdf
-    elif hosp != 'All':
-        cwdf = cwdf[cwdf['Hospital Attended']==hosp]
+    # if hosp == 'All':
+    #     cwdf = cwdf
+    # elif hosp != 'All':
+    #     cwdf = cwdf[cwdf['Hospital Attended']==hosp]
     
     
     fig = go.Figure(
@@ -189,7 +200,7 @@ with st.expander("Previous Performance"):
                   line_color = 'rgba(255,255,255,0.2)', 
                   height=20))])
      
-    fig.update_layout(title_text="Hospital Handovers Completed in the Past 24 Hours",title_font_color = '#264653',title_x=0,margin= dict(l=0,r=10,b=10,t=30), height=400)                                                               
+    fig.update_layout(title_text="Handovers Completed in the Past 24 Hours",title_font_color = '#264653',title_x=0,margin= dict(l=0,r=10,b=10,t=30), height=400)
     
     st.plotly_chart(fig, use_container_width=True)      
     
@@ -227,7 +238,7 @@ with st.expander("Previous Performance"):
                   line_color = 'rgba(255,255,255,0.2)',
                   height=20))])
      
-    fig.update_layout(title_text="Hospital Handovers Completed by Hour",title_font_color = '#264653',title_x=0,margin= dict(l=0,r=10,b=10,t=30), height=600)                                                               
+    fig.update_layout(title_text="Handovers Completed by Hour",title_font_color = '#264653',title_x=0,margin= dict(l=0,r=10,b=10,t=30), height=600)
     
     p1.plotly_chart(fig, use_container_width=True)  
     
@@ -263,14 +274,28 @@ with st.expander("Previous Performance"):
 
 
 # Contact Form
+def local_css(file_name):
+    with open(file_name) as f:
+        st.markdown(f"<style>{f.read()}</style>", unsafe_allow_html=True)
+
+
+local_css("style/style.css")
 
 with st.expander("Contact us"):
-    with st.form(key='contact', clear_on_submit=True):
-        
-        email = st.text_input('Contact Email')
-        st.text_area("Query","Please fill in all the information or we may not be able to process your request")  
-        
-        submit_button = st.form_submit_button(label='Send Information')
+    contact_form = """
+        <form action="https://formsubmit.co/you_contactus@proton.me" method="POST">
+            <input type="hidden" name="_captcha" value="false">
+            <input type="text" name="name" placeholder="Your name" required>
+            <input type="email" name="email" placeholder="Your email" required>
+            <textarea name="message" placeholder="Your message here" required></textarea>
+            <button type="submit">Send</button>
+        </form>
+        """
+    left_column, right_column = st.columns(2)
+    with left_column:
+        st.markdown(contact_form, unsafe_allow_html=True)
+    with right_column:
+        st.empty()
         
         
         
