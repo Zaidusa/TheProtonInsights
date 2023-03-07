@@ -5,10 +5,12 @@ Created on Tue Aug 24 10:17:07 2021
 @author: Andi5
 """
 import streamlit as st
+#from streamlit_lottie import st_lottie
 import time
 import pandas as pd
 import plotly.express as px
 import plotly.graph_objects as go
+
 
 
 st.set_page_config(page_title='ProtonInsights',  layout='wide', page_icon=':Bar chart fill:')
@@ -18,20 +20,24 @@ st.set_page_config(page_title='ProtonInsights',  layout='wide', page_icon=':Bar 
 
 t1, t2 = st.columns((0.7,1))
 
-t1.image('images/Pie.jpg', width = 120)
+t1.image('images/Pie.jpg', width = 60)
 #t2.title("ProtonInsights - we work on data projects!!!")
 st.markdown("""
     <style>
     .big-font {
-        font-size:80px !important;
+        font-size:100px !important;
     }
     </style>
     """, unsafe_allow_html=True)
-st.markdown('<p class="big-font">Proton Insights</p>', unsafe_allow_html=True)
+#lottie_coding = load_lottieurl("https://assets5.lottiefiles.com/packages/lf20_fcfjwiyb.json")
+st.markdown('<p class="big-font">The Proton Insights</p>', unsafe_allow_html=True)
 left_column, right_column = st.columns(2)
-with left_column:
-    st.header("we work on data!!!")
-t2.markdown(" **Tel:** 040 24443076 **| Address:** 705,Amrutha castle, near Telecom colony,Gachibowli,Hyderabad,India,500032 **|email:** you_contactus@proton.me ")
+with right_column:
+    st.write("The Proton Insights is pioneering what AI and analytics can do to solve some of the toughest problems faced by organizations globally. We develop bespoke solutions powered by data and technology for several Fortune 500 companies. We have offices in multiple cities across the US, UK, India, and Singapore, and a substantial remote global workforce. ")
+    #st_lottie(lottie_coding, height=600, key="coding0")
+with right_column:
+    t2.markdown('''**Tel:** 040 24443076 **| Address:** 705,Amrutha castle, near Telecom colony,Gachibowli,Hyderabad,India,500032
+            |email: you_contactus@proton.me''')
 
 
 
